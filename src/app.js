@@ -8,6 +8,7 @@ import body_parser from "body-parser";
 import compression from "compression";
 
 import view_route from "./api/view.js";
+import historic_views_route from "./api/historic_views.js";
 
 
 // Initalization
@@ -40,6 +41,7 @@ app.use(body_parser.json());
 
 // Routes
 app.use("/view", view_route);
+app.use("/historic/view", historic_views_route);
 
 
 // Execution
