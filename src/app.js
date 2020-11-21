@@ -28,8 +28,8 @@ app.use(body_parser.json());
 
 app.get("/", (req, res) => {
 
-  // console.log(req)
-  // console.log("\n\n\n\n\n\n")
+  console.log(req)
+  console.log("\n\n\n\n\n\n")
   axios.get("https://img.shields.io/badge/coverage-100%25-brightgreen")
   .then(data => {
     res.set("Content-Type", "image/svg+xml")
