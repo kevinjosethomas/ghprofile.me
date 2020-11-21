@@ -25,11 +25,43 @@ Add the code below to your Profile README. Replace ``YOUR_USERNAME`` with your G
 ```
 
 #### Repository READMEs
-Add the code below to your Profile README. Replace ``YOUR_USERNAME`` with your GitHub username, then replace ``YOUR_REPOSITORY_NAME`` with your GitHub repository name! Now your GitHub Profile Views will automatically increment every time someone views your profile. Unfortunately, we cannot differentiate unique views yet :(
+Add the code below to your Repository README. Replace ``YOUR_USERNAME`` with your GitHub username, then replace ``YOUR_REPOSITORY_NAME`` with your GitHub repository name! Now your GitHub Profile Views will automatically increment every time someone views your profile. Unfortunately, we cannot differentiate unique views yet :(
 ```
-![](https://api.ghprofile.me/view?username=YOUR_USERNAME-YOUR_REPOSITORY_NAME)
+![](https://api.ghprofile.me/view?username=YOUR_USERNAME-YOUR_REPOSITORY_NAME&label=repository%20view%20count)
+```
+
+### Customization
+Customize your counter image by adding the URLs of the desired styles and colors you want to the end of your counter URL!
+
+#### Custom Styles
+```
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=YOUR_STYLE)
+```
+- ``&style=plastic``
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=plastic)
+- ``&style=flat``
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=flat-)
+- ``&style=flat-square``
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=flat-square)
+- ``&style=for-the-badge``
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=for-the-badge)
+- ``&style=social``
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=social)
+
+#### Custom Colors
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&color=green)
+```
+![](https://api.ghprofile.me/view?username=YOUR_USERNAME&color=YOUR_COLOR)
+```
+Colours can be -
+- CSS Named Colours (``red``, ``green``, ``blue``)
+- Hex Codes (``FF0000``, ``00FF00``, ``0000FF``)
+
+#### Custom Text
+![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&label=hello)
+```
+![](https://api.ghprofile.me/view?username=YOUR_USERNAME&label=YOUR_CUSTOM_TEXT_HERE)
 ```
 
 ### Coming Soon
-- Customizable images - styles, colours, text, etc
 - Intuitive web dashboard for statistics and configuration
