@@ -25,9 +25,9 @@ Add the code below to your Profile README. Replace ``YOUR_USERNAME`` with your G
 ```
 
 #### Repository READMEs
-Add the code below to your Profile README. Replace ``YOUR_USERNAME`` with your GitHub username, then replace ``YOUR_REPOSITORY_NAME`` with your GitHub repository name! Now your GitHub Profile Views will automatically increment every time someone views your profile. Unfortunately, we cannot differentiate unique views yet :(
+Add the code below to your Repository README. Replace ``YOUR_USERNAME`` with your GitHub username, then replace ``YOUR_REPOSITORY_NAME`` with your GitHub repository name! Now your GitHub Profile Views will automatically increment every time someone views your profile. Unfortunately, we cannot differentiate unique views yet :(
 ```
-![](https://api.ghprofile.me/view?username=YOUR_USERNAME-YOUR_REPOSITORY_NAME)
+![](https://api.ghprofile.me/view?username=YOUR_USERNAME-YOUR_REPOSITORY_NAME&label=repository%20view%20count)
 ```
 
 ### Customization
