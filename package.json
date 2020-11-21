@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Essential tools to spice up your GitHub Profile READMEs!",
   "main": "src/app.js",
+  "type": "module",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
