@@ -1,8 +1,8 @@
-import axios from "axios"
 import path from "path";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import express from "express";
+import Pool from "pg-pool";
 import { fileURLToPath } from "url";
 import body_parser from "body-parser";
 import compression from "compression";
@@ -15,9 +15,19 @@ const app = express();
 
 // Configuration
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
-global.debug = (msg) => {
+global.debug = async (msg) => {
   process.env.DEBUG && console.log(msg);
 }
+
+const pool = new Pool({
+  database: process.env.DATABASE,
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  password: process.env.DATABASE_PASSWORD,
+  port: process.env.DATABASE_PORT,
+  idleTimeoutMillis: 1000,
+  connectionTimeoutMillis: 1000
+})
 
 
 // Middleware
@@ -27,6 +37,13 @@ app.use(body_parser.json());
 
 
 // Execution
-app.listen(process.env.PORT || 2011, () => {
-  console.log(`Server Started on ${process.env.PORT || "2011"}`)
-})
+(async () => {
+
+  global.client = await pool.connect()
+
+  app.listen(process.env.PORT || 2011, () => {
+    console.log(`Server Started on ${process.env.PORT || "2011"}`)
+  })
+
+
+})()
