@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
   console.log(req)
   console.log("\n\n\n\n\n\n")
-  res.json({success: true})
+  res.redirect("https://img.shields.io/badge/style-for--the--badge-green?logo=appveyor&style=for-the-badge")
 
 })
 
