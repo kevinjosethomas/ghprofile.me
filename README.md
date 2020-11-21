@@ -38,18 +38,18 @@ Customize your counter image by adding the URLs of the desired styles and colors
 ![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=YOUR_STYLE)
 ```
 - ``&style=plastic``
-![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=plastic)
+![](https://api.ghprofile.me/view?username=TESTING&style=plastic)
 - ``&style=flat``
-![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=flat-)
+![](https://api.ghprofile.me/view?username=TESTING&style=flat-)
 - ``&style=flat-square``
-![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=flat-square)
+![](https://api.ghprofile.me/view?username=TESTING&style=flat-square)
 - ``&style=for-the-badge``
-![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=for-the-badge)
+![](https://api.ghprofile.me/view?username=TESTING&style=for-the-badge)
 - ``&style=social``
-![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&style=social)
+![](https://api.ghprofile.me/view?username=TESTING&style=social)
 
 #### Custom Colors
-![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&color=green)
+![](https://api.ghprofile.me/view?username=TESTING&color=green)
 ```
 ![](https://api.ghprofile.me/view?username=YOUR_USERNAME&color=YOUR_COLOR)
 ```
@@ -58,7 +58,7 @@ Colours can be -
 - Hex Codes (``FF0000``, ``00FF00``, ``0000FF``)
 
 #### Custom Text
-![](https://api.ghprofile.me/view?username=trustedmercury-ghprofile.me&label=hello)
+![](https://api.ghprofile.me/view?username=TESTING&label=hello)
 ```
 ![](https://api.ghprofile.me/view?username=YOUR_USERNAME&label=YOUR_CUSTOM_TEXT_HERE)
 ```
