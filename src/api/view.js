@@ -10,8 +10,6 @@ router.get("/", async (req, res) => {
   let custom_style = req.query.style;
   let custom_color = req.query.color;
 
-  console.log(req.headers["User-Agent"] || req.headers["user-agent"])
-
   if (!username) {
     res.status(400).json({
       success: false,
