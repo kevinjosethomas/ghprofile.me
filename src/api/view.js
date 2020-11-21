@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   if (!username) {
     res.status(400).json({
       success: false,
-      message: "Bad Request - Invalid GitHub username was provided."
+      message: "Bad Request - No GitHub username was provided."
     }).end();
     return
   }
