@@ -40,7 +40,9 @@ router.get("/", async (req, res) => {
       return;
     }
   }
-  catch(e) {}
+  catch(e) {
+    return;
+  }
 
   await increment_view_count(username)
 
