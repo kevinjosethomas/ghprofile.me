@@ -41,9 +41,8 @@ app.use(body_parser.json());
 
   global.client = await pool.connect()
 
-  app.listen(process.env.PORT || 2011, () => {
-    console.log(`Server Started on ${process.env.PORT || "2011"}`)
+  app.listen(process.env.PORT || 1120, async () => {
+    console.log(`Server Started on ${process.env.PORT || "1120"}`)
   })
-
 
 })()
