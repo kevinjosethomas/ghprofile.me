@@ -1,0 +1,28 @@
+{
+  "name": "ghprofile.me",
+  "version": "1.0.0",
+  "description": "Essential tools to spice up your GitHub Profile READMEs!",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrustedMercury/ghprofile.me.git"
+  },
+  "keywords": [
+    "github",
+    "github",
+    "profile",
+    "profile",
+    "readme",
+    "api"
+  ],
+  "author": "TrustedMercury",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TrustedMercury/ghprofile.me/issues"
+  },
+  "homepage": "https://github.com/TrustedMercury/ghprofile.me#readme"
+}
