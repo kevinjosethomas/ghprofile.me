@@ -39,7 +39,7 @@ app.use(body_parser.json());
 
 
 // Routes
-app.use("/view", view__route)
+app.use("/view", view_route)
 
 
 // Execution
