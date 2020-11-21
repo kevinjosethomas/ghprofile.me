@@ -1,3 +1,4 @@
+import axios from "axios"
 import path from "path";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -27,9 +28,16 @@ app.use(body_parser.json());
 
 app.get("/", (req, res) => {
 
-  console.log(req)
-  console.log("\n\n\n\n\n\n")
-  res.send("<img src=\"https://img.shields.io/badge/coverage-100%25-brightgreen\"></img>")
+  // console.log(req)
+  // console.log("\n\n\n\n\n\n")
+  axios.get("https://img.shields.io/badge/coverage-100%25-brightgreen")
+  .then(data => {
+    console.log(data.data)
+  })
+  .catch(e =. {
+    console.log(e)
+  })
+  res.send("done")
 
 })
 
