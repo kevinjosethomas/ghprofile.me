@@ -76,11 +76,9 @@ async function get_view_count(username) {
 
 async function increment_view_count(username) {
 
-  const timestamp = Math.floor(Date.now() / 1000)
-
   await client.query(
     "INSERT INTO profile_views (username, timestamp) VALUES ($1, $2)",
-    [username.toLowerCase().slice(0, 40), timestamp]
+    [username.toLowerCase().slice(0, 40), new Date()]
   )
 
 }
