@@ -35,9 +35,12 @@ router.get("/", async (req, res) => {
     shield.data
   ).end();
 
-  if (!req.headers["user-agent"].startsWith("github-camo") && !req.headers["User-Agent"].startswith("github-camo")) {
-    return;
+  try {
+    if (!req.headers["user-agent"].startsWith("github-camo") && !req.headers["User-Agent"].startsWith("github-camo")) {
+      return;
+    }
   }
+  catch(e) {}
 
   await increment_view_count(username)
 
