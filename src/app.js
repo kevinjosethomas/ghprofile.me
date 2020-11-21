@@ -7,6 +7,8 @@ import { fileURLToPath } from "url";
 import body_parser from "body-parser";
 import compression from "compression";
 
+import view_route from "./api/view.js";
+
 
 // Initalization
 dotenv.config();
@@ -27,7 +29,7 @@ const pool = new Pool({
   port: process.env.DATABASE_PORT,
   idleTimeoutMillis: 1000,
   connectionTimeoutMillis: 1000
-})
+});
 
 
 // Middleware
@@ -36,13 +38,17 @@ app.use(compression());
 app.use(body_parser.json());
 
 
+// Routes
+app.use("/view", view__route)
+
+
 // Execution
 (async () => {
 
-  global.client = await pool.connect()
+  global.client = await pool.connect();
 
   app.listen(process.env.PORT || 1120, () => {
-    console.log(`Server Started on ${process.env.PORT || "1120"}`)
+    console.log(`Server Started on ${process.env.PORT || "1120"}`);
   })
 
 })()
