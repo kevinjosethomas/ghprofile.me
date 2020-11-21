@@ -28,6 +28,7 @@ app.use(body_parser.json());
 app.get("/", (req, res) => {
 
   console.log(req)
+  console.log("\n\n\n\n\n\n")
 
 })
 
