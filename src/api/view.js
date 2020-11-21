@@ -6,6 +6,9 @@ const router = express.Router();
 router.get("/", async (req, res) => {
 
   const username = req.query.username;
+  let custom_label = req.query.label;
+  let custom_style = req.query.style;
+  let custom_color = req.query.color;
 
   if (!username) {
     res.status(400).json({
@@ -25,9 +28,21 @@ router.get("/", async (req, res) => {
 
   let count = await get_view_count(username)
 
-  let shield = await axios.get(
-    `https://img.shields.io/badge/Profile%20view%20count-${count}-blue?logo=github&style=for-the-badge`
-  )
+  if (!custom_label) {
+    custom_label = "profile%20view%20count"
+  } else if (custom_label.includes("-") || custom_label.includes("/")) {
+    custom_label = "profile%20view%20count"
+  }
+  if (!custom_style) {
+    custom_style = "for-the-badge"
+  }
+  if (!custom_color) {
+    custom_color = "blue"
+  }
+
+  let shield_url = `https://img.shields.io/badge/${custom_label}-${count}-${custom_color}?logo=github&style=${custom_style}`
+
+  let shield = await axios.get(shield_url)
 
   res.set("Content-Type", "image/svg+xml")
   res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
