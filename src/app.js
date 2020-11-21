@@ -25,6 +25,13 @@ app.use(compression());
 app.use(body_parser.json());
 
 
+app.get("/", (req, res) => {
+
+  console.log(req)
+
+})
+
+
 // Execution
 app.listen(process.env.PORT || 2011, () => {
   console.log(`Server Started on ${process.env.PORT || "2011"}`)
