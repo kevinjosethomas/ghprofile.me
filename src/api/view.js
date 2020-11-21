@@ -1,7 +1,43 @@
+import axios from "axios";
 import express from "express";
 
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+
+  const username = req.query.username;
+
+  if (!username) {
+    res.status(400).json({
+      success: false,
+      message: "Bad Request - Invalid GitHub username was provided."
+    }).end();
+    return
+  }
+
+  if (username.length > 39) {
+    res.status(400).json({
+      success: false,
+      message: "Bad Request - Invalid GitHub username was provided."
+    }).end();
+    return
+  }
+
+  let count = await get_view_count(username)
+
+  let shield = await axios.get(
+    `https://img.shields.io/badge/Profile%20view%20count-${count}-blue?logo=github&style=for-the-badge`
+  )
+
+  res.set("Content-Type", "image/svg+xml")
+  res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
+  res.status(200).send(
+    shield.data
+  ).end();
+
+  await increment_view_count(username)
+
+});
 
 async function get_view_count(username) {
 
@@ -10,7 +46,7 @@ async function get_view_count(username) {
     [username.toLowerCase()]
   )
 
-  return response.data.count;
+  return response.rows[0].count;
 
 };
 
@@ -24,25 +60,5 @@ async function increment_view_count(username) {
   )
 
 }
-
-router.get("/", async (req, res) => {
-
-  const username = req.query.username;
-  if (username.length > 39) {
-    res.status(400).json({
-      success: false,
-      message: "Bad Request - Invalid GitHub username was provided."
-    }).end();
-    return
-  }
-
-  let count = await get_view_count(username)
-  console.log(count);
-  res.send(count)
-
-  await increment_view_count(username)
-
-
-});
 
 export default router;
