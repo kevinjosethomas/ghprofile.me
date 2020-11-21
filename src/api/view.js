@@ -7,6 +7,9 @@ router.get("/", async (req, res) => {
 
   const username = req.query.username;
 
+  console.log(req.headers)
+  console.log("\n\n")
+
   if (!username) {
     res.status(400).json({
       success: false,
