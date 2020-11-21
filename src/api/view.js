@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
     custom_color = "blue"
   }
 
-  let shield_url = `https://img.shields.io/badge/${custom_label}-${count}-${custom_color}?logo=github&style=${custom_style}`
+  let shield_url = `https://img.shields.io/badge/${encodeURI(custom_label)}-${count}-${custom_color}?logo=github&style=${custom_style}`
 
   let shield = await axios.get(shield_url)
 
