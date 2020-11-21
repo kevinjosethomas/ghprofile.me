@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
   axios.get("https://img.shields.io/badge/coverage-100%25-brightgreen")
   .then(data => {
     res.set("Content-Type", "image/svg+xml")
-    res.set("Cache-Control", ["no-cache", "no-store", "must-revalidate", "max-age=0"])
+    res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
     res.send(data.data)
   })
   .catch(e => {
