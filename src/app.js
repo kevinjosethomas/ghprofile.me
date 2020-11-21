@@ -32,12 +32,12 @@ app.get("/", (req, res) => {
   // console.log("\n\n\n\n\n\n")
   axios.get("https://img.shields.io/badge/coverage-100%25-brightgreen")
   .then(data => {
-    console.log(data.data)
+    res.set("Content-Type", "image/svg+xml")
+    res.send(data.data)
   })
   .catch(e => {
     console.log(e)
   })
-  res.send("done")
 
 })
 
