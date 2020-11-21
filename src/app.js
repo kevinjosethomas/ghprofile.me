@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
   .then(data => {
     console.log(data.data)
   })
-  .catch(e =. {
+  .catch(e => {
     console.log(e)
   })
   res.send("done")
