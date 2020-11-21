@@ -1,7 +1,7 @@
 # ghprofile.me
 Essential tools to spice up your GitHub Profile READMEs!
 
-#### This API is currently in BETA. We're constantly adding new features to make it easier for you to make 🔥 GitHub READMEs!
+#### This API is currently in BETA. We're constantly adding new features to make it easier for you to make 🔥 GitHub READMEs! I would really appreciate it if you give us a ⭐ so this README can become awesome too 💖
 
 # Important Links
 - [**Documentation**](https://docs.ghprofile.me/)
