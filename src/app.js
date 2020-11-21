@@ -8,7 +8,6 @@ import body_parser from "body-parser";
 import compression from "compression";
 
 import view_route from "./api/view.js";
-// console.log(view_route)
 
 
 // Initalization
