@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
   console.log(req)
   console.log("\n\n\n\n\n\n")
-  res.send("https://img.shields.io/badge/style-for--the--badge-green?logo=appveyor&style=for-the-badge")
+  res.send("<img src="https://img.shields.io/badge/style-for--the--badge-green?logo=appveyor&style=for-the-badge"></img>")
 
 })
 
