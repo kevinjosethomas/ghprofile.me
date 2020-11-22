@@ -18,7 +18,7 @@ export default class Home extends React.Component {
 
   get_data = async (username) => {
 
-    let response = await axios.get(`/historic/view?username=${username}`)
+    let response = await axios.get(`${process.env.NODE_ENV === "development" ? "" : process.env.REACT_APP_API_URL}/historic/view?username=${username}`)
     this.setState({
       data: response.data.payload,
       username: username.toLowerCase()
