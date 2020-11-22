@@ -11,19 +11,17 @@ router.get("/", async (req, res) => {
   let custom_color = req.query.color;
 
   if (!username) {
-    res.status(400).json({
+    return res.status(400).json({
       success: false,
       message: "Bad Request - No GitHub username was provided."
     }).end();
-    return
   }
 
   if (username.length > 39) {
-    res.status(400).json({
+    return res.status(400).json({
       success: false,
       message: "Bad Request - Invalid GitHub username was provided."
     }).end();
-    return
   }
 
   let count = await get_view_count(username)
@@ -46,7 +44,7 @@ router.get("/", async (req, res) => {
 
   res.set("Content-Type", "image/svg+xml")
   res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
-  res.status(200).send(
+  return res.status(200).send(
     shield.data
   ).end();
 
