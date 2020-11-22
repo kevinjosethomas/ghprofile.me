@@ -6,10 +6,9 @@ export default function Chart(props) {
   const labels = []
   const datapoints = []
 
-  props.data.forEach((item, index) => {
+  props.data.graph.forEach((item, index) => {
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-
 
     let date_obj = new Date(Date.parse(item.reporting_date));
 
@@ -43,7 +42,7 @@ export default function Chart(props) {
             },
             ticks: {
               autoSkip: true,
-              maxTicksLimit: 20
+              maxTicksLimit: (window.innerWidth > 512) ? 20 : 5
             }
           }],
           yAxes: [{
@@ -53,7 +52,8 @@ export default function Chart(props) {
             ticks: {
               precision: 0,
               autoSkip: true,
-              maxTicksLimit: 10
+              maxTicksLimit: 10,
+              beginAtZero: true
             }
           }]
         }

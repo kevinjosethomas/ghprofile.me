@@ -16,13 +16,17 @@ export default class Home extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  get_data = async (username) => {
 
-    let response = await axios.get("/historic/view?username=TrustedMercury")
+    let response = await axios.get(`/historic/view?username=${username}`)
     this.setState({
-      data: response.data.payload
+      data: response.data.payload,
+      username: username.toLowerCase()
     });
+  }
 
+  async componentDidMount() {
+    this.get_data("TrustedMercury")
   }
 
   render() {
@@ -31,7 +35,7 @@ export default class Home extends React.Component {
       <div className="bg-gray-200 w-full h-full">
         <Navbar />
         {this.state.data &&
-          <Landing data={this.state.data} />
+          <Landing data={this.state.data} username={this.state.username} get_data={this.get_data} />
         }
       </div>
     )
