@@ -4,7 +4,9 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <div className="bg-gray-300 w-screen h-screen">
+        
+      </div>
     )
   }
 
