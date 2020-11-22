@@ -1,12 +1,15 @@
+// Modules
+import cors from "cors";
 import path from "path";
+import Pool from "pg-pool";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import express from "express";
-import Pool from "pg-pool";
 import { fileURLToPath } from "url";
 import body_parser from "body-parser";
 import compression from "compression";
 
+// Routes
 import view_route from "./api/view.js";
 import historic_views_route from "./api/historic_views.js";
 
@@ -34,6 +37,7 @@ const pool = new Pool({
 
 
 // Middleware
+app.use(cors());
 app.use(helmet());
 app.use(compression());
 app.use(body_parser.json());
