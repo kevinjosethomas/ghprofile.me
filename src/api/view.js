@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
 
   res.set("Content-Type", "image/svg+xml")
   res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
-  return res.status(200).send(
+  res.status(200).send(
     shield.data
   ).end();
 
