@@ -63,7 +63,6 @@ export default function Chart(props) {
         datasets: [{
           label: "Views",
           data: datapoints,
-          backgroundColor: null,
           borderColor: "#4F46E5",
           backgroundColor: "#8C85ED",
           pointBackgroundColor: "#4F46E5"

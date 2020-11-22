@@ -13,11 +13,11 @@ export default function Landing(props) {
 
       <div className="flex flex-row items-center justify-start py-2 px-4 mb-10 w-5/12 bg-gray-300 rounded">
         <i className="fas fa-user text-gray-600 pr-2"></i>
-        <input onKeyPress={(event) => event.key == "Enter" ? props.get_data(event.target.value) : void(0)} className="w-full bg-gray-300 outline-none text-gray-600 placeholder-gray-500" placeholder="Enter your GitHub username or repository (username-repository)"></input>
+        <input onKeyPress={(event) => event.key === "Enter" ? props.get_data(event.target.value) : void(0)} className="w-full bg-gray-300 outline-none text-gray-600 placeholder-gray-500" placeholder="Enter your GitHub username or repository (username-repository)"></input>
       </div>
 
       <div className="flex flex-col items-center justify-center mb-48 p-2 py-10 w-10/12 max-w-full bg-gray-300 rounded-lg text-center">
-        <span class="mb-5 text-3xl md:text-4xl font-inter font-semibold">@<span class="font-bold">{props.username}</span>'s GitHub Stats</span>
+        <span className="mb-5 text-3xl md:text-4xl font-inter font-semibold">@<span className="font-bold">{props.username}</span>'s GitHub Stats</span>
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="flex flex-col items-center justify-center w-full md:w-auto py-3 px-5 my-3 md:my-0 md:mx-3 bg-gray-400 rounded-lg">
             <span className="font-inter text-2xl font-semibold"><i className="fab fa-slack-hash"></i> All Time</span>
