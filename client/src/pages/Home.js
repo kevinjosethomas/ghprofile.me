@@ -20,7 +20,7 @@ export default class Home extends React.Component {
 
     let response = await axios.get("/historic/view?username=TrustedMercury")
     this.setState({
-      data: response.data
+      data: response.data.payload
     });
 
   }
