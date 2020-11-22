@@ -1,7 +1,9 @@
+// Modules
 import React from 'react';
-import ReactDOM from 'react-dom';
 import dotenv from "dotenv";
+import ReactDOM from 'react-dom';
 
+// Components
 import App from './App';
 
 dotenv.config();
