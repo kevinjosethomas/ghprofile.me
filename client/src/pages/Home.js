@@ -1,6 +1,7 @@
 // Modules
 import React from "react";
 import api from "../api.js";
+import qs from "querystring";
 
 // Components
 import Navbar from "./components/Navbar.js";
@@ -23,10 +24,12 @@ export default class Home extends React.Component {
       data: response.data.payload,
       username: username.toLowerCase()
     });
+
   }
 
   async componentDidMount() {
-    this.get_data("TrustedMercury")
+    const parameters = qs.parse(this.props.location.search.replace("?", ""))
+    this.get_data(parameters.username ? parameters.username : "TrustedMercury")
   }
 
   render() {

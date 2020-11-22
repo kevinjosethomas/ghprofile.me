@@ -13,8 +13,7 @@ import tailwind from "./styles/tailwind.css";
 export default function App() {
   return (
     <Router>
-      <Route path="/" exact>
-        <Home />
+      <Route path="/" exact component={Home}>
       </Route>
     </Router>
   );
