@@ -28,9 +28,11 @@ export default class Home extends React.Component {
   render() {
 
     return (
-      <div className="bg-gray-300 w-screen h-screen">
+      <div className="bg-gray-200 w-full h-full">
         <Navbar />
-        <Landing data={this.state.data} />
+        {this.state.data &&
+          <Landing data={this.state.data} />
+        }
       </div>
     )
   }
