@@ -15,7 +15,7 @@ Essential tools to spice up your GitHub Profile READMEs!
 # GitHub Documentation
 
 ## README View Counter
-![](https://api.ghprofile.me/view?username=TrustedMercury-ghprofile.me)
+![](https://api.ghprofile.me/view?username=TrustedMercury-ghprofile.me&label=repository%20view%20count)
 
 ### Quickstart
 #### Profile READMEs
