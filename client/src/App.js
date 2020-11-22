@@ -7,7 +7,8 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import Home from "./pages/Home.js";
 
 // Other
-import Tailwind from "./styles/tailwind.css";
+import custom from "./styles/custom.css";
+import tailwind from "./styles/tailwind.css";
 
 
 export default function App() {
