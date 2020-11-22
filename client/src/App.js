@@ -1,12 +1,16 @@
+// Modules
 import React from "react";
 import { Line } from 'react-chartjs-2';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
+// Components
 import Home from "./pages/Home.js";
 
+// Other
 import Tailwind from "./styles/tailwind.css";
 
-function App() {
+
+export default function App() {
   return (
     <Router>
       <Route path="/" exact>
@@ -15,5 +19,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;
