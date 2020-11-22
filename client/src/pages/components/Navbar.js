@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  return(
+  return (
     <div className="flex flex-row items-center justify-between w-screen py-3 px-5 md:px-20 bg-gray-400">
       <div class="flex flex-row items-center justify-center">
         <Link to="/" class="text-2xl md:text-3xl text-gray-800 font-semibold font-inter">ghprofile.me</Link>
