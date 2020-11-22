@@ -1,10 +1,13 @@
+import React from "react";
 import { Line } from 'react-chartjs-2';
+
+import Home from "./pages/Home.js";
 
 function App() {
   return (
-    <div>
-      
-    </div>
+    <React.Fragment>
+      <Home />
+    </React.Fragment>
   );
 }
 
