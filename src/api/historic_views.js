@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 
   // Fetches views per period
   let period = await client.query(
-    "select sum(is_user) as _all_time, sum(in_30days) as _month, sum(in_14days) as _fortnight, sum(in_7days) as _week, sum(in_day) as _day, sum(in_hour) as _hour from (select 1 as is_user,case when timestamp > (now() - interval '30' day) then 1 else 0 end as in_30days,case when timestamp > (now() - interval '14' day) then 1 else 0 end as in_14days, case when timestamp > (now() - interval '7' day) then 1 else 0 end as in_7days, case when timestamp > (now() - interval '1' day) then 1 else 0 end as in_day, case when timestamp > (now() - interval '1' hour) then 1 else 0 end as in_hour from profile_views where username = $1) as sq1",
+    "select coalesce(sum(is_user), 0) as _all_time, coalesce(sum(in_30days), 0) as _month, coalesce(sum(in_14days), 0) as _fortnight, coalesce(sum(in_7days), 0) as _week, coalesce(sum(in_day), 0) as _day, coalesce(sum(in_hour), 0) as _hour from (select 1 as is_user,case when timestamp > (now() - interval '30' day) then 1 else 0 end as in_30days,case when timestamp > (now() - interval '14' day) then 1 else 0 end as in_14days, case when timestamp > (now() - interval '7' day) then 1 else 0 end as in_7days, case when timestamp > (now() - interval '1' day) then 1 else 0 end as in_day, case when timestamp > (now() - interval '1' hour) then 1 else 0 end as in_hour from profile_views where username = $1) as sq1",
     [username.toLowerCase()]
   )
 
