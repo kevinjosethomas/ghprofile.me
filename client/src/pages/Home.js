@@ -26,7 +26,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    let data = "hello"
 
     return (
       <div className="bg-gray-300 w-screen h-screen">
