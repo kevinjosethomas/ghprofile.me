@@ -1,7 +1,8 @@
 // Modules
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
+
   return (
     <div className="flex flex-row items-center justify-between w-screen py-3 px-5 md:px-20 bg-gray-400">
       <div className="flex flex-row items-center justify-center">
@@ -13,4 +14,5 @@ export default function Navbar() {
       </div>
     </div>
   )
+  
 }
