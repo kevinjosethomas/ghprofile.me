@@ -47,10 +47,9 @@ export default function Landing(props) {
         <div className="flex flex-col items-center justify-center w-10/12 mt-10">
           <Chart className="w-full" data={props.data} />
         </div>
-
       </div>
 
-  </div>
+    </div>
   )
 
 }
