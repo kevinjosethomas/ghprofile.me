@@ -2,20 +2,21 @@
 import React from "react";
 import api from "../api.js";
 import qs from "querystring";
+import { withRouter } from "react-router-dom";
 
 // Components
 import Navbar from "./components/Navbar.js";
 import Landing from "./components/Landing.js";
 
 
-export default class Home extends React.Component {
+export default withRouter(class Home extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       data: null
     };
-  }
+  };
 
   get_data = async (username) => {
 
@@ -24,6 +25,10 @@ export default class Home extends React.Component {
       data: response.data.payload,
       username: username.toLowerCase()
     });
+
+    if (this.state.data.period._all_time === "0") {
+      this.props.updateModal(true);
+    };
 
   }
 
@@ -37,11 +42,12 @@ export default class Home extends React.Component {
     return (
       <div className="bg-gray-200 w-full h-full">
         <Navbar />
-        {this.state.data &&
+        {
+          this.state.data &&
           <Landing data={this.state.data} username={this.state.username} get_data={this.get_data} />
         }
       </div>
     )
   }
 
-}
+})
