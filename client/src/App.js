@@ -31,7 +31,7 @@ export default class App extends React.Component {
       <Router>
         {
           this.state.showModal &&
-          <Modal updateModal={this.updateModal} />
+          <Modal showModal={this.state.showModal} updateModal={this.updateModal} />
         }
         <Route path="/" exact>
           <Home updateModal={this.updateModal} />
