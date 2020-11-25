@@ -1,7 +1,10 @@
+import cron from "cron";
 import axios from "axios";
 import express from "express";
+import format from "pg-format";
 
 const router = express.Router();
+let view_list = {};
 
 router.get("/", async (req, res) => {
 
@@ -49,7 +52,8 @@ router.get("/", async (req, res) => {
   ).end();
 
   try {
-    if (!req.headers["user-agent"].startsWith("github-camo") && !req.headers["User-Agent"].startsWith("github-camo")) {
+    const user_agent = req.headers["user-agent"] ? req.headers["user-agent"] : req.headers["User-Agent"]
+    if (process.env.NODE_ENV != "development " && !user_agent.startsWith("github-camo")) {
       return;
     }
   }
@@ -66,19 +70,58 @@ async function get_view_count(username) {
   let response = await client.query(
     "SELECT COUNT(*) FROM profile_views WHERE username = $1",
     [username.toLowerCase()]
-  )
+  );
 
-  return response.rows[0].count;
+  let count = parseInt(response.rows[0].count);
+
+  if (view_list[username]) {
+    count += view_list[username].length;
+  };
+
+  return count;
 
 };
 
 async function increment_view_count(username) {
 
-  await client.query(
-    "INSERT INTO profile_views (username, timestamp) VALUES ($1, $2)",
-    [username.toLowerCase().slice(0, 40), new Date()]
-  )
+  const timestamp = new Date();
+
+  if (view_list[username]) {
+    view_list[username].push([username.toLowerCase(), timestamp]);
+  } else if (!view_list[username]) {
+    view_list[username] = [[username.toLowerCase(), timestamp]];
+  };
 
 }
+
+const update_database = new cron.CronJob("*/1 * * * *", async () => {
+
+  try {
+    if (!Object.keys(view_list).length) return;
+
+    debug("Updating database...");
+
+    let updater = [];
+    await Object.keys(view_list).forEach((item, index) => {
+      updater = updater.concat(view_list[item].slice(0, 100))
+    })
+
+    await client.query(
+      format(
+        "INSERT INTO profile_views (username, timestamp) VALUES %L",
+        updater
+      )
+    )
+
+    view_list = [];
+
+    debug("Updated database...\n\n")
+  }
+  catch(e) {
+    debug(e);
+  };
+
+})
+update_database.start();
 
 export default router;
