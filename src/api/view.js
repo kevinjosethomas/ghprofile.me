@@ -103,7 +103,7 @@ const update_database = new cron.CronJob("*/1 * * * *", async () => {
 
     let updater = [];
     await Object.keys(view_list).forEach((item, index) => {
-      updater = updater.concat(view_list[item].slice(0, 100))
+      updater = updater.concat(view_list[item].slice(0, 25))
     })
 
     await client.query(
