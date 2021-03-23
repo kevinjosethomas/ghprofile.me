@@ -87,24 +87,37 @@ async function incrementViewCount(name) {
 
 }
 
-const updateViewCount = new cron.CronJob("*/1 * * * *", async () => {
+async function getViews(keys) {
+
+  let newViews = [];
+  for (const key of keys) {
+    if (!views[key].cachedViews.length) continue;
+
+    newViews = newViews.concat(views[key].cachedViews.slice(0, 1500));
+    views[key].cachedViews = [];
+  } 
+
+  return newViews
+
+}
+
+const updateViewCount = new cron.CronJob("*/60 * * * *", async () => {
 
   try {
-    if (!Object.keys(views).length) return;
+
+    const keys = Object.keys(views);
+
+    if (!keys.length) return;
 
     debug("Updating database...\n");
 
-    let updater = [];
-    await Object.keys(views).forEach(item => {
-      if (!item.cachedViews.length) return;
-      updater = updater.concat(views[item].cachedViews.slice(0, 1500));
-      views[item].cachedViews = [];
-    });
+    const newViews = await getViews(keys)
+    if (!newViews.length) return;
 
     await client.query(
       format(
         "INSERT INTO views (name, timestamp) VALUES %L",
-        updater
+        newViews
       )
     );
 
