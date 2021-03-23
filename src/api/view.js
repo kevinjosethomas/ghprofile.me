@@ -12,18 +12,12 @@ router.get("/", async (req, res) => {
   let custom_label = req.query.label;
   let custom_style = req.query.style;
   let custom_color = req.query.color;
+  const transparent = req.query.transparent.toLowerCase() == "true";
 
   if (!username) {
     return res.status(400).json({
       success: false,
       message: "Bad Request - No GitHub username was provided."
-    }).end();
-  }
-
-  if (username.length > 39) {
-    return res.status(400).json({
-      success: false,
-      message: "Bad Request - Invalid GitHub username was provided."
     }).end();
   }
 
@@ -41,16 +35,23 @@ router.get("/", async (req, res) => {
     custom_color = "blue"
   }
 
-  let shield_url = `https://img.shields.io/badge/${custom_label}-${count}-${custom_color}?logo=github&style=${custom_style}`
+  let shield;
+  if (!transparent) {
+    console.log("ye")
+    shield = await axios.get(`https://img.shields.io/badge/${custom_label}-${count}-${custom_color}?logo=github&style=${custom_style}`)
+    res.set("Content-Type", "image/svg+xml")
+    res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
+    res.status(200).send(
+      shield.data
+    ).end();
+  } else {
+    shield = "./assets/transparent.png"
+    res.status(200).attachment(
+      shield
+    ).end();
+  }
 
-  let shield = await axios.get(shield_url)
-
-  res.set("Content-Type", "image/svg+xml")
-  res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
-  res.status(200).send(
-    shield.data
-  ).end();
-
+  
   try {
     const user_agent = req.headers["user-agent"] ? req.headers["user-agent"] : req.headers["User-Agent"]
     if (process.env.NODE_ENV != "development " && !user_agent.startsWith("github-camo")) {
