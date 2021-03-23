@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
   let custom_label = req.query.label;
   let custom_style = req.query.style;
   let custom_color = req.query.color;
-  const transparent = req.query.transparent.toLowerCase() == "true";
+  const transparent = req.query.transparent ? req.query.transparent.toLowerCase() == "true" : false;
 
   if (!username) {
     return res.status(400).json({
@@ -37,7 +37,6 @@ router.get("/", async (req, res) => {
 
   let shield;
   if (!transparent) {
-    console.log("ye")
     shield = await axios.get(`https://img.shields.io/badge/${custom_label}-${count}-${custom_color}?logo=github&style=${custom_style}`)
     res.set("Content-Type", "image/svg+xml")
     res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
