@@ -1,58 +1,41 @@
 import cron from "cron";
-import axios from "axios";
 import express from "express";
 import format from "pg-format";
 
 const router = express.Router();
-let view_list = {};
+const views = {};
 
 router.get("/", async (req, res) => {
 
-  const username = req.query.username;
-  let custom_label = req.query.label;
-  let custom_style = req.query.style;
-  let custom_color = req.query.color;
-  const transparent = req.query.transparent ? req.query.transparent.toLowerCase() == "true" : false;
+  let name = req.query.name || req.query.username;
+  let customLabel = req.query.label || "profile%20view%20count";
+  let customStyle = req.query.style || "for-the-badge";
+  let customColor = req.query.color || "blue";
+  let transparent = req.query.transparent ? req.query.transparent.toLowerCase() == "true" : false;
 
-  if (!username) {
+  if (!name) {
     return res.status(400).json({
       success: false,
-      message: "Bad Request - No GitHub username was provided."
+      message: "Bad Request - No GitHub name was provided."
     }).end();
   }
 
-  let count = await get_view_count(username)
+  name = name.toLowerCase();
 
-  if (!custom_label) {
-    custom_label = "profile%20view%20count"
-  } else if (custom_label.includes("-") || custom_label.includes("/")) {
-    custom_label = "profile%20view%20count"
-  }
-  if (!custom_style) {
-    custom_style = "for-the-badge"
-  }
-  if (!custom_color) {
-    custom_color = "blue"
-  }
+  const count = await getViewCount(name)
 
   let shield;
   if (!transparent) {
-    shield = await axios.get(`https://img.shields.io/badge/${custom_label}-${count}-${custom_color}?logo=github&style=${custom_style}`)
-    res.set("Content-Type", "image/svg+xml")
-    res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
-    res.status(200).send(
-      shield.data
-    ).end();
+    await res.status(200).redirect(
+      `https://img.shields.io/badge/${customLabel}-${count}-${customColor}?logo=github&style=${customStyle}`
+    );
   } else {
     shield = "./assets/transparent.png"
-    res.status(200).attachment(
-      shield
-    ).end();
+    await res.status(200).attachment(shield).end();
   }
 
-  
   try {
-    const user_agent = req.headers["user-agent"] ? req.headers["user-agent"] : req.headers["User-Agent"]
+    const user_agent = req.headers["user-agent"] ? req.headers["user-agent"] : req.headers["User-Agent"];
     if (process.env.NODE_ENV != "development " && !user_agent.startsWith("github-camo")) {
       return;
     }
@@ -61,59 +44,67 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  await increment_view_count(username)
+  await incrementViewCount(name)
 
 });
 
-async function get_view_count(username) {
+async function getViewCount(username) {
 
-  let response = await client.query(
-    "SELECT COUNT(*) FROM profile_views WHERE username = $1",
-    [username.toLowerCase()]
-  );
+  let totalViewCount;
+  const user = views[username];
+  if (user) {
+    totalViewCount = user.totalViewCount;
+  } else {
+     const count = await client.query(
+      "SELECT COUNT(*) FROM views WHERE name = $1",
+      [username]
+    );
+    if (count.rowCount) {
+      totalViewCount = count.rows[0].count;
+      views[username] = {
+        totalViewCount: 0,
+        cachedViews: []
+      }
+    } else {
+      totalViewCount = 0;
+      views[username] = {
+        totalViewCount: 0,
+        cachedViews: []
+      }
+    }
+  }
 
-  let count = parseInt(response.rows[0].count);
-
-  if (view_list[username]) {
-    count += view_list[username].length;
-  };
-
-  return count;
+  return totalViewCount;
 
 };
 
-async function increment_view_count(username) {
+async function incrementViewCount(username) {
 
   const timestamp = new Date();
-
-  if (view_list[username]) {
-    view_list[username].push([username.toLowerCase(), timestamp]);
-  } else if (!view_list[username]) {
-    view_list[username] = [[username.toLowerCase(), timestamp]];
-  };
+  views[username].cachedViews.push([username, timestamp]);
+  views[username].totalViewCount++;
 
 }
 
-const update_database = new cron.CronJob("*/1 * * * *", async () => {
+const updateViewCount = new cron.CronJob("*/1 * * * *", async () => {
 
   try {
-    if (!Object.keys(view_list).length) return;
+    if (!Object.keys(views).length) return;
 
-    debug("Updating database...");
+    debug("Updating database...\n");
 
     let updater = [];
-    await Object.keys(view_list).forEach((item, index) => {
-      updater = updater.concat(view_list[item].slice(0, 25))
-    })
+    await Object.keys(views).forEach(item => {
+      updater = updater.concat(views[item].cachedViews.slice(0, 1500));
+      views[item].cachedViews = [];
+    });
 
     await client.query(
       format(
-        "INSERT INTO profile_views (username, timestamp) VALUES %L",
+        "INSERT INTO views (name, timestamp) VALUES %L",
         updater
       )
     )
-
-    view_list = [];
 
     debug("Updated database...\n\n")
   }
@@ -122,6 +113,6 @@ const update_database = new cron.CronJob("*/1 * * * *", async () => {
   };
 
 })
-update_database.start();
+updateViewCount.start();
 
 export default router;
