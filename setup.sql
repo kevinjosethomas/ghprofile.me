@@ -1,5 +1,5 @@
 
 CREATE TABLE IF NOT EXISTS views (
-  label VARCHAR,
+  name VARCHAR,
   timestamp TIMESTAMPTZ
 );
