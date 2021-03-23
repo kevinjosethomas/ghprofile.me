@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS profile_views (
-  username VARCHAR(44),
-  timestamp timestamptz
-)
+CREATE TABLE IF NOT EXISTS views (
+  label VARCHAR,
+  timestamp TIMESTAMPTZ
+);
