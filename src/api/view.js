@@ -96,6 +96,7 @@ const updateViewCount = new cron.CronJob("*/1 * * * *", async () => {
 
     let updater = [];
     await Object.keys(views).forEach(item => {
+      if (!item.cachedViews.length) return;
       updater = updater.concat(views[item].cachedViews.slice(0, 1500));
       views[item].cachedViews = [];
     });
