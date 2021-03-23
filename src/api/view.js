@@ -48,26 +48,26 @@ router.get("/", async (req, res) => {
 
 });
 
-async function getViewCount(username) {
+async function getViewCount(name) {
 
   let totalViewCount;
-  const user = views[username];
+  const user = views[name];
   if (user) {
     totalViewCount = user.totalViewCount;
   } else {
      const count = await client.query(
       "SELECT COUNT(*) FROM views WHERE name = $1",
-      [username]
+      [name]
     );
     if (count.rowCount) {
       totalViewCount = count.rows[0].count;
-      views[username] = {
+      views[name] = {
         totalViewCount: 0,
         cachedViews: []
       }
     } else {
       totalViewCount = 0;
-      views[username] = {
+      views[name] = {
         totalViewCount: 0,
         cachedViews: []
       }
@@ -78,11 +78,11 @@ async function getViewCount(username) {
 
 };
 
-async function incrementViewCount(username) {
+async function incrementViewCount(name) {
 
   const timestamp = new Date();
-  views[username].cachedViews.push([username, timestamp]);
-  views[username].totalViewCount++;
+  views[name].cachedViews.push([name, timestamp]);
+  views[name].totalViewCount++;
 
 }
 
