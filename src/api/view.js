@@ -102,14 +102,21 @@ const updateViewCount = new cron.CronJob("*/1 * * * *", async () => {
       views[item].cachedViews = [];
     });
 
+    console.log(
+      format(
+        "INSERT INTO views (name, timestamp) VALUES %L",
+        updater
+      )
+    );
+
     await client.query(
       format(
         "INSERT INTO views (name, timestamp) VALUES %L",
         updater
       )
-    )
+    );
 
-    debug("Updated database...\n\n")
+    debug("Updated database...\n\n");
   }
   catch(e) {
     debug(e);
