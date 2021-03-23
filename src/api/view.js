@@ -1,4 +1,5 @@
 import cron from "cron";
+import axios from "axios";
 import express from "express";
 import format from "pg-format";
 
@@ -24,13 +25,13 @@ router.get("/", async (req, res) => {
 
   const count = await getViewCount(name)
 
-  let shield;
   if (!transparent) {
-    await res.status(200).redirect(
-      `https://img.shields.io/badge/${customLabel}-${count}-${customColor}?logo=github&style=${customStyle}`
-    );
+    const shield = await axios.get(`https://img.shields.io/badge/${customLabel}-${count}-${customColor}?logo=github&style=${customStyle}`)
+    res.set("Content-Type", "image/svg+xml");
+    res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
+    await res.status(200).send(shield.data).end();
   } else {
-    shield = "./assets/transparent.png"
+    const shield = "./assets/transparent.png"
     await res.status(200).attachment(shield).end();
   }
 
