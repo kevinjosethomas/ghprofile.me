@@ -85,6 +85,8 @@ async function incrementViewCount(name) {
   views[name].cachedViews.push([name, timestamp]);
   views[name].totalViewCount++;
 
+  console.log(views)
+
 }
 
 const updateViewCount = new cron.CronJob("*/1 * * * *", async () => {
