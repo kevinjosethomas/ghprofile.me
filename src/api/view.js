@@ -85,8 +85,6 @@ async function incrementViewCount(name) {
   views[name].cachedViews.push([name, timestamp]);
   views[name].totalViewCount++;
 
-  console.log(views)
-
 }
 
 const updateViewCount = new cron.CronJob("*/1 * * * *", async () => {
@@ -101,13 +99,6 @@ const updateViewCount = new cron.CronJob("*/1 * * * *", async () => {
       updater = updater.concat(views[item].cachedViews.slice(0, 1500));
       views[item].cachedViews = [];
     });
-
-    console.log(
-      format(
-        "INSERT INTO views (name, timestamp) VALUES %L",
-        updater
-      )
-    );
 
     await client.query(
       format(
