@@ -63,7 +63,7 @@ async function getViewCount(name) {
     if (count.rowCount) {
       totalViewCount = count.rows[0].count;
       views[name] = {
-        totalViewCount: 0,
+        totalViewCount: totalViewCount,
         cachedViews: []
       }
     } else {
