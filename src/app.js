@@ -19,7 +19,7 @@ export const app = async () => {
   server.use('/view', requireGithubNameMiddleware, viewRoute);
   server.use('/historic/view', requireGithubNameMiddleware, historicViewsRoute);
 
-  server.listen(process.env.PORT || 1120, () => {
-    console.log(`Server Started on ${process.env.PORT || '1120'}`);
+  server.listen(port, () => {
+    console.log('Server started on %s', port);
   });
 };
