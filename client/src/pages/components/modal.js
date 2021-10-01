@@ -1,7 +1,6 @@
-import { Spring } from "react-spring/renderprops";
+import { Spring } from "react-spring";
 
 export default function Modal(props) {
-
   return (
     <div className="Modal w-full h-full fixed flex flex-row items-center justify-center z-100 inset-0 fadein">
       <Spring
@@ -17,7 +16,7 @@ export default function Modal(props) {
           </div>
           <div className="flex flex-col items-start justify-center mx-4">
             <span className="text-2xl font-inter font-semibold leading-normal">Possible missing view counter</span>
-            <span className="text-gray-600">We do not have any view statistics on the profile/repository you provided. Please make sure you have the view counter embed present on your README so we can track how many views your profile/repository receives! Read our docs at <a href="https://docs.ghprofile.me/" target="_blank" className="underline">https://docs.ghprofile.me/</a> to quickly learn how to add your view counter!</span>
+            <span className="text-gray-600">We do not have any view statistics on the profile/repository you provided. Please make sure you have the view counter embed present on your README so we can track how many views your profile/repository receives! Read our docs at <a href="https://docs.ghprofile.me/" target="_blank" className="underline" rel="noreferrer">https://docs.ghprofile.me/</a> to quickly learn how to add your view counter!</span>
           </div>
           <button onClick={props.updateModal.bind(this, false)} className="outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 text-gray-600 outline-none" viewBox="0 0 20 20" fill="currentColor">
@@ -29,5 +28,4 @@ export default function Modal(props) {
       </Spring>
     </div>
   )
-
 }

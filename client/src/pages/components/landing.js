@@ -1,9 +1,6 @@
-// Components
-import Chart from "./Chart.js";
-
+import Chart from "./chart.js";
 
 export default function Landing(props) {
-
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="flex flex-col items-center justify-center mt-48 mb-32 px-2 text-center">
@@ -48,8 +45,6 @@ export default function Landing(props) {
           <Chart className="w-full" data={props.data} />
         </div>
       </div>
-
     </div>
   )
-
 }
