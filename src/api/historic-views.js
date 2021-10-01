@@ -1,9 +1,11 @@
 import SQL from 'sql-template-strings';
 import express from "express";
+import { getPool } from '../pool';
 
 const router = express.Router();
 
 const fetchViewsPerDay = (name) => {
+  const pool = await getPool();
   const query = SQL`
     SELECT s1.reporting_date,
       CASE
@@ -14,11 +16,12 @@ const fetchViewsPerDay = (name) => {
     LEFT JOIN (SELECT Date(timestamp) reporting_date_1, Count(*) no_of_views FROM views WHERE name = ${name} GROUP BY Date(timestamp)) AS s2
     ON s1.reporting_date = s2.reporting_date_1
   `;
-  return client.query(query);
+  return pool.query(query);
 };
 
 // Fetches views per period
 const fetchViewsPerPeriod = (name) => {
+  const pool = await getPool();
   const query = SQL`
     SELECT
       Coalesce(SUM(is_user), 0)   AS _all_time,
@@ -51,7 +54,7 @@ const fetchViewsPerPeriod = (name) => {
     FROM   VIEWS
     WHERE name = ${name}) AS sq1
   `;
-  return client.query(query);
+  return pool.query(query);
 }
 
 router.get('/', async (req, res) => {

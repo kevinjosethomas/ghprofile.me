@@ -1,5 +1,6 @@
 import { CronJob } from 'cron';
 import SQL from 'sql-template-strings';
+import { getPool } from '../pool.js';
 
 /** Every hour in crontab format */
 const everyHour = '*/60 * * * *';
@@ -14,7 +15,8 @@ export const updateViewCount = new CronJob(everyHour, async () => {
     const newViews = await getViews(keys);
     if (!newViews.length) return;
 
-    await client.query(SQL`
+    const pool = await getPool();
+    await pool.query(SQL`
       INSERT INTO views (name, timestamp) VALUES ${newViews}
     `);
 
