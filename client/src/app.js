@@ -1,18 +1,11 @@
-// Modules
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./pages/home.js";
+import Modal from "./pages/components/modal.js";
+import "./styles/custom.css";
+import "./styles/tailwind.css";
 
-// Components
-import Home from "./pages/Home.js";
-import Modal from "./pages/components/Modal.js";
-
-// Other
-import custom from "./styles/custom.css";
-import tailwind from "./styles/tailwind.css";
-
-
-export default class App extends React.Component {
-
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +16,7 @@ export default class App extends React.Component {
   updateModal = (value) => {
     this.setState({
       showModal: value
-    })
+    });
   }
 
   render() {
@@ -39,4 +32,4 @@ export default class App extends React.Component {
       </Router>
     );
   }
-}
+};

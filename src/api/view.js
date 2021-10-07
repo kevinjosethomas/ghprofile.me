@@ -1,133 +1,34 @@
-import cron from "cron";
 import axios from "axios";
 import express from "express";
-import format from "pg-format";
+import { getViewCount } from '../common/get-view-count.js';
+import { incrementViewCount } from '../common/increment-view-count.js';
 
 const router = express.Router();
-const views = {};
 
-router.get("/", async (req, res) => {
-
-  let name = req.query.name || req.query.username;
-  let customLabel = req.query.label || "profile%20view%20count";
-  let customStyle = req.query.style || "for-the-badge";
-  let customColor = req.query.color || "blue";
-  let transparent = req.query.transparent ? req.query.transparent.toLowerCase() == "true" : false;
-
-  if (!name) {
-    return res.status(400).json({
-      success: false,
-      message: "Bad Request - No GitHub name was provided."
-    }).end();
-  }
-
-  name = name.toLowerCase();
-
-  const count = await getViewCount(name)
+router.get('/', async (req, res) => {
+  const name = req.opts.name;
+  const customLabel = req.query.label || 'profile%20view%20count';
+  const customStyle = req.query.style || 'for-the-badge';
+  const customColor = req.query.color || 'blue';
+  const transparent = req.query.transparent ? req.query.transparent.toLowerCase() === 'true' : false;
+  const count = await getViewCount(name);
 
   if (!transparent) {
     const shield = await axios.get(`https://img.shields.io/badge/${customLabel}-${count}-${customColor}?logo=github&style=${customStyle}`)
     res.set("Content-Type", "image/svg+xml");
     res.set("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0")
-    await res.status(200).send(shield.data).end();
+    res.status(200).send(shield.data).end();
   } else {
     const shield = "./assets/transparent.png"
-    await res.status(200).attachment(shield).end();
+    res.status(200).attachment(shield).end();
   }
 
-  try {
-    const user_agent = req.headers["user-agent"] ? req.headers["user-agent"] : req.headers["User-Agent"];
-    if (process.env.NODE_ENV != "development " && !user_agent.startsWith("github-camo")) {
-      return;
-    }
-  }
-  catch(e) {
-    return;
-  }
+  const userAgent = req.headers['user-agent'] ? req.headers['user-agent'] : req.headers['User-Agent'];
+  const isDev = process.env.NODE_ENV === 'development';
+  const isGithubCamo = userAgent.startsWith('github-camo');
+  if (!isDev && !isGithubCamo) return;
 
-  await incrementViewCount(name)
-
+  incrementViewCount(name);
 });
-
-async function getViewCount(name) {
-
-  let totalViewCount;
-  const user = views[name];
-  if (user) {
-    totalViewCount = user.totalViewCount;
-  } else {
-     const count = await client.query(
-      "SELECT COUNT(*) FROM views WHERE name = $1",
-      [name]
-    );
-    if (count.rowCount) {
-      totalViewCount = count.rows[0].count;
-      views[name] = {
-        totalViewCount: totalViewCount,
-        cachedViews: []
-      }
-    } else {
-      totalViewCount = 0;
-      views[name] = {
-        totalViewCount: 0,
-        cachedViews: []
-      }
-    }
-  }
-
-  return totalViewCount;
-
-};
-
-async function incrementViewCount(name) {
-
-  const timestamp = new Date();
-  views[name].cachedViews.push([name, timestamp]);
-  views[name].totalViewCount++;
-
-}
-
-async function getViews(keys) {
-
-  let newViews = [];
-  for (const key of keys) {
-    if (!views[key].cachedViews.length) continue;
-
-    newViews = newViews.concat(views[key].cachedViews.slice(0, 1500));
-    views[key].cachedViews = [];
-  } 
-
-  return newViews
-
-}
-
-const updateViewCount = new cron.CronJob("*/60 * * * *", async () => {
-
-  try {
-
-    const keys = Object.keys(views);
-
-    if (!keys.length) return;
-
-    debug("Updating database...\n");
-
-    const newViews = await getViews(keys)
-    if (!newViews.length) return;
-
-    await client.query(
-      format(
-        "INSERT INTO views (name, timestamp) VALUES %L",
-        newViews
-      )
-    );
-
-    debug("Updated database...\n\n");
-  }
-  catch(e) {
-    debug(e);
-  };
-
-})
-updateViewCount.start();
 
 export default router;

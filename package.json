@@ -2,11 +2,11 @@
   "name": "ghprofile.me",
   "version": "1.0.0",
   "description": "Essential tools to spice up your GitHub Profile READMEs!",
-  "main": "src/app.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": " set NODE_ENV=development && nodemon src/app.js"
+    "start": "node src/index.js",
+    "dev": " set NODE_ENV=development && nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,17 +27,21 @@
   },
   "homepage": "https://github.com/TrustedMercury/ghprofile.me#readme",
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.22.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "cron": "^1.8.2",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "helmet": "^4.2.0",
-    "pg": "^8.5.1",
+    "helmet": "^4.6.0",
+    "pg": "^8.7.1",
     "pg-format": "^1.0.4",
-    "pg-pool": "^3.2.2",
-    "uuid": "^8.3.1"
+    "pg-pool": "^3.4.1",
+    "sql-template-strings": "^2.2.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/pg-pool": "^2.0.3"
   }
 }

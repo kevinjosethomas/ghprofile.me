@@ -1,21 +1,16 @@
-// Modules
 import { Line } from "react-chartjs-2";
 
 export default function Chart(props) {
-
   const labels = []
   const datapoints = []
 
-  props.data.graph.forEach((item, index) => {
-
+  props.data.graph.forEach(item => {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-
-    let date_obj = new Date(Date.parse(item.reporting_date));
+    const date_obj = new Date(Date.parse(item.reporting_date));
 
     labels.push(`${date_obj.getDate()} ${monthNames[date_obj.getMonth()]}`);
     datapoints.push(item.no_of_views);
-
-  })
+  });
 
   return (
     <Line
