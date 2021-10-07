@@ -1,4 +1,4 @@
-import { URLSearchParams } from "url";
+import qs from "querystring";
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
 import api from "../api.js";
@@ -27,7 +27,7 @@ export default withRouter(class Home extends Component {
   }
 
   async componentDidMount() {
-    const parameters = new URLSearchParams(this.props.location.search.replace("?", ""));
+    const parameters = qs.parse(this.props.location.search.replace("?", ""));
     this.getData(parameters.username ? parameters.username : "TrustedMercury");
   }
 
