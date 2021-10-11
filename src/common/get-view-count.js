@@ -1,4 +1,4 @@
-import { fetchUser } from './fetch-user';
+import { fetchUser } from './fetch-user.js';
 
 export const getViewCount = async (name) => {
   const user = views[name];
