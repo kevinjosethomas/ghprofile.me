@@ -6,6 +6,8 @@ import viewRoute from './api/view.js';
 import historicViewsRoute from './api/historic-views.js';
 import { requireQueryParam } from './middleware/require-query-param.js';
 
+const port = parseInt(process.env.PORT || '0', 10);
+
 export const app = async () => {  
   const server = express();
 
@@ -19,7 +21,7 @@ export const app = async () => {
   server.use('/view', requireGithubNameMiddleware, viewRoute);
   server.use('/historic/view', requireGithubNameMiddleware, historicViewsRoute);
 
-  server.listen(port, () => {
-    console.log('Server started on %s', port);
+  const listener = server.listen(port, () => {
+    console.log('Server started on %s', listener.address().port);
   });
 };

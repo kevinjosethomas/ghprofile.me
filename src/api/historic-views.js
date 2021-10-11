@@ -1,10 +1,10 @@
 import SQL from 'sql-template-strings';
 import express from "express";
-import { getPool } from '../pool';
+import { getPool } from '../pool.js';
 
 const router = express.Router();
 
-const fetchViewsPerDay = (name) => {
+const fetchViewsPerDay = async (name) => {
   const pool = await getPool();
   const query = SQL`
     SELECT s1.reporting_date,
@@ -20,7 +20,7 @@ const fetchViewsPerDay = (name) => {
 };
 
 // Fetches views per period
-const fetchViewsPerPeriod = (name) => {
+const fetchViewsPerPeriod = async (name) => {
   const pool = await getPool();
   const query = SQL`
     SELECT
