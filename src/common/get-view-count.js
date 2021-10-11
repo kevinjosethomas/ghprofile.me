@@ -11,13 +11,14 @@ export const getViewCount = async (name) => {
   const pool = await getPool();
   const query = SQL`SELECT COUNT(*) FROM views WHERE name = ${name}`;
   const count = await pool.query(query);
+  const totalViewCount = count.rowCount ? count.rows[0].count : 0;
 
   // Create initial cache
   views[name] = {
     cachedViews: [],
-    totalViewCount: count
+    totalViewCount
   };
 
   // Return views
-  return count.rowCount ? count.rows[0].count : 0;
+  return totalViewCount;
 };
