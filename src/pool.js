@@ -1,4 +1,8 @@
+import dotenv from "dotenv";
 import Pool from 'pg-pool';
+
+// Load .env into process.env
+dotenv.config();
 
 const database = process.env.DATABASE ?? 'postgres';
 const user = process.env.DATABASE_USER ?? 'postgres';
