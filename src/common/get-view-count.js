@@ -1,4 +1,5 @@
 import { fetchUser } from './fetch-user.js';
+import { views } from '../store.js';
 
 export const getViewCount = async (name) => {
   const user = views[name];
