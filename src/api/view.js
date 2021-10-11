@@ -1,7 +1,7 @@
 import axios from "axios";
 import express from "express";
 import { getViewCount } from '../common/get-view-count.js';
-import { incrementViewCount } from '../common/increment-view-count.js';
+import { incrementCachedViewCount } from '../common/increment-cached-view-count.js';
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
   const isGithubCamo = userAgent.startsWith('github-camo');
   if (!isDev && !isGithubCamo) return;
 
-  incrementViewCount(name);
+  incrementCachedViewCount(name);
 });
 
 export default router;
