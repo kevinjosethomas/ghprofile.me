@@ -1,7 +1,7 @@
 import { CronJob } from 'cron';
 import SQL from 'sql-template-strings';
 import { getPool } from '../pool.js';
-import { getViews } from '../common/get-views';
+import { getViews } from '../common/get-views.js';
 
 /** Every hour in crontab format */
 const everyHour = '*/60 * * * *';
