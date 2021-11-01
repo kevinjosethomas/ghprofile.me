@@ -11,7 +11,7 @@ export const updateViewCount = new CronJob(everyHour, async () => {
     const keys = Object.keys(views);
     if (!keys.length) return;
 
-    logger.debug('Updating database.');
+    console.debug('Updating database.');
 
     const newViews = getViews(keys);
     if (!newViews.length) return;
@@ -21,8 +21,8 @@ export const updateViewCount = new CronJob(everyHour, async () => {
       INSERT INTO views (name, timestamp) VALUES ${newViews}
     `);
 
-    logger.debug('Updated database.');
+    console.debug('Updated database.');
   } catch(error) {
-    logger.error(error);
+    console.error(error);
   };
 });
