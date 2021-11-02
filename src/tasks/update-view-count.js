@@ -1,6 +1,7 @@
 import { CronJob } from 'cron';
 import SQL from 'sql-template-strings';
 import { getPool } from '../pool.js';
+import { views } from '../store.js';
 import { getViews } from '../common/get-views.js';
 
 /** Every hour in crontab format */
