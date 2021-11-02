@@ -65,3 +65,25 @@ Colours can be -
 
 ### Coming Soon
 - Intuitive web dashboard for statistics and configuration
+
+
+## Development
+1. Install docker.
+2. Setup a dev container with the following commands.
+```bash
+# Add a container for postgres
+docker run --rm --name postgres-db -p 5432:5432 -e POSTGRES_PASSWORD=mypassword -d postgres
+# Enter the container
+docker exec -it postgres-db bash
+# Start the postgres cli
+psql --host=0.0.0.0 --user postgres
+# Copy + paste the text from the setup.sql
+# This will create the needed tables
+# Close the postgres cli
+exit
+# Exit the container
+```
+3. Start the app with. Feel free to use PM2 instead.
+```bash
+PORT=9000 DATABASE=postgres DATABASE_HOST=localhost DATABASE_USER=postgres DATABASE_PASSWORD=mypassword npm start
+```
