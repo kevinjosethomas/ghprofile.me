@@ -18,9 +18,7 @@ export const updateViewCount = new CronJob(everyHour, async () => {
     if (!newViews.length) return;
 
     const pool = await getPool();
-    await pool.query(SQL`
-      INSERT INTO views (name, timestamp) VALUES ${newViews}
-    `);
+    await pool.query('INSERT INTO views (name, timestamp) VALUES %L', newViews);
 
     console.debug('Updated database.');
   } catch(error) {
