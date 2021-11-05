@@ -6,7 +6,5 @@ export const incrementCachedViewCount = async (name) => {
     if (!user) await fetchUser(name);
     views[name].cachedViews.push([name, new Date()]);
     
-    console.log(views[name].cachedViews)
-    
     views[name].totalViewCount++;
 };
