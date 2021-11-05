@@ -6,7 +6,8 @@ import { views } from '../store.js';
 import { getViews } from '../common/get-views.js';
 
 /** Every hour in crontab format */
-const everyHour = '*/60 * * * *';
+// */60 * * * *
+const everyHour = '*/5 * * * *';
 
 export const updateViewCount = new CronJob(everyHour, async () => {
   try {
