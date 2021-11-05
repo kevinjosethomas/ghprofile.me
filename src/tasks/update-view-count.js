@@ -7,7 +7,7 @@ import { getViews } from '../common/get-views.js';
 
 /** Every hour in crontab format */
 // */60 * * * *
-const everyHour = '*/5 * * * *';
+const everyHour = '*/60 * * * *';
 
 export const updateViewCount = new CronJob(everyHour, async () => {
   try {
@@ -20,8 +20,6 @@ export const updateViewCount = new CronJob(everyHour, async () => {
     if (!newViews.length) return;
 
     const pool = await getPool();
-    
-    console.log(format('INSERT INTO views (name, timestamp) VALUES %L', newViews));
     
     await pool.query(format('INSERT INTO views (name, timestamp) VALUES %L', newViews));
 
