@@ -1,4 +1,5 @@
 import { CronJob } from 'cron';
+import format from "pg-format";
 import SQL from 'sql-template-strings';
 import { getPool } from '../pool.js';
 import { views } from '../store.js';
@@ -18,7 +19,7 @@ export const updateViewCount = new CronJob(everyHour, async () => {
     if (!newViews.length) return;
 
     const pool = await getPool();
-    await pool.query('INSERT INTO views (name, timestamp) VALUES %L', newViews);
+    await pool.query(format('INSERT INTO views (name, timestamp) VALUES %L', newViews));
 
     console.debug('Updated database.');
   } catch(error) {
