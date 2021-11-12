@@ -1,5 +1,5 @@
 export const requireQueryParam = (paramNames, errorMessage) => (req, res, next) => {
-    const name = (paramNames.map(name => req.query[name]).filter(name => name !== undefined)[0] || '').toLowerCase();
+    const name = (paramNames.map(name => req.query[name]).find(name => name !== undefined) || '').toLowerCase();
     if (name) {
         if (!req.opts) req.opts = {};
         req.opts.name = name;
