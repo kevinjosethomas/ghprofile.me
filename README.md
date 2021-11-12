@@ -15,19 +15,19 @@ Essential tools to spice up your GitHub Profile READMEs!
 # GitHub Documentation
 
 ## README View Counter
-![](https://api.ghprofile.me/view?username=TrustedMercury-ghprofile.me&label=repository%20view%20count)
+[![](https://api.ghprofile.me/view?username=TrustedMercury-ghprofile.me&label=repository%20view%20count)](https://ghprofile.me/?name=TrustedMercury-ghprofile.me)
 
 ### Quickstart
 #### Profile READMEs
 Add the code below to your Profile README. Replace ``YOUR_USERNAME`` with your GitHub username. Now your GitHub Profile Views will automatically increment every time someone views your profile. Unfortunately, we cannot differentiate unique views yet :(
 ```
-![](https://api.ghprofile.me/view?username=YOUR_USERNAME)
+[![](https://api.ghprofile.me/view?username=YOUR_USERNAME)](https://ghprofile.me/view?username=YOUR_USERNAME)
 ```
 
 #### Repository READMEs
 Add the code below to your Repository README. Replace ``YOUR_USERNAME`` with your GitHub username, then replace ``YOUR_REPOSITORY_NAME`` with your GitHub repository name! Now your GitHub Profile Views will automatically increment every time someone views your profile. Unfortunately, we cannot differentiate unique views yet :(
 ```
-![](https://api.ghprofile.me/view?username=YOUR_USERNAME-YOUR_REPOSITORY_NAME&label=repository%20view%20count)
+[![](https://api.ghprofile.me/view?username=YOUR_USERNAME-YOUR_REPOSITORY_NAME&label=repository%20view%20count)](https://ghprofile.me/view?username=YOUR_USERNAME-YOUR_REPOSITORY_NAME)
 ```
 
 ### Customization
