@@ -2,6 +2,13 @@
   "name": "backend",
   "version": "1.0.0",
   "dependencies": {
-    "cross-env": "5.0.5"
+    "cross-env": "5.0.5",
+    "fastify": "^3.24.0",
+    "fastify-compress": "^3.6.1",
+    "fastify-cors": "^6.0.2",
+    "fastify-helmet": "^5.3.2",
+    "fastify-plugin": "^3.0.0",
+    "fastify-postgres": "^3.6.0",
+    "pg": "^8.7.1"
   }
 }

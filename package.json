@@ -4,8 +4,8 @@
   "description": "🎨 Essential tools to spice up your GitHub READMEs!",
   "private": true,
   "workspaces": [
-    "back",
-    "front"
+    "src/backend",
+    "src/frontend"
   ],
   "scripts": {},
   "repository": {
