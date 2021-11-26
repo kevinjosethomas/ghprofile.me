@@ -7,7 +7,9 @@
     "src/backend",
     "src/frontend"
   ],
-  "scripts": {},
+  "scripts": {
+    "dev:back": "yarn workspace backend dev"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/trustedmercury/ghprofile.me.git"
