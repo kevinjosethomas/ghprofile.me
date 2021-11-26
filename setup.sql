@@ -1,4 +1,0 @@
-CREATE TABLE IF NOT EXISTS views (
-  name VARCHAR,
-  timestamp TIMESTAMPTZ
-);
