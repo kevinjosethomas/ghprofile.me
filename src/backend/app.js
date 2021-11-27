@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import fastify from "fastify";
 
+import store from "./plugins/store.js";
 import database from "./plugins/database.js";
 import middleware from "./plugins/middleware.js";
 
@@ -10,6 +11,7 @@ dotenv.config();
 
 const app = fastify({ logger: true });
 
+app.register(store);
 app.register(database);
 app.register(middleware);
 
