@@ -8,7 +8,10 @@
     "src/frontend"
   ],
   "scripts": {
-    "dev:back": "yarn workspace backend dev"
+    "dev:backend": "yarn workspace backend dev",
+    "dev:frontend": "yarn workspace frontend dev",
+    "prod:backend": "yarn workspace backend start",
+    "prod:frontend": "yarn workspace frontend start"
   },
   "repository": {
     "type": "git",

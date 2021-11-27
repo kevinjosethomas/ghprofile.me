@@ -1,7 +1,7 @@
 import { CronJob } from "cron";
 import format from "pg-format";
 
-const interval = "* * * * *";
+const interval = "*/60 * * * *";
 
 export default async function updateViewCount(fastify) {
   new CronJob(interval, async () => {
