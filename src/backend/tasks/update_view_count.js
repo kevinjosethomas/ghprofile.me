@@ -20,7 +20,12 @@ export default async function updateViewCount(fastify) {
           continue;
         }
 
-        formatted.push([key.toLowerCase(), parseInt(fastify.views[key].new), new Date()]);
+        const date = new Date();
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+
+        formatted.push([key.toLowerCase(), parseInt(fastify.views[key].new), date]);
 
         fastify.views[key].stored += fastify.views[key].new;
         fastify.views[key].new = 0;
