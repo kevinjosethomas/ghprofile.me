@@ -7,6 +7,7 @@ import middleware from "./plugins/middleware.js";
 
 import updateViewCount from "./tasks/update_view_count.js";
 
+import chart from "./routes/chart.js";
 import counter from "./routes/counter.js";
 import leaderboard from "./routes/leaderboard.js";
 
@@ -18,6 +19,7 @@ app.register(store);
 app.register(database);
 app.register(middleware);
 
+app.register(chart);
 app.register(counter);
 app.register(leaderboard);
 

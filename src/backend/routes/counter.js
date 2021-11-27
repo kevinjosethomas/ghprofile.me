@@ -46,7 +46,7 @@ const getCachedViewCount = async (fastify, name) => {
       "SELECT SUM(count) AS count FROM readme_views WHERE LOWER(name) = $1",
       [name.toLowerCase()]
     );
-    const count = query.rows[0].count || 0;
+    const count = parseInt(query.rows[0].count) || 0;
 
     fastify.views[name] = {
       new: 0,
