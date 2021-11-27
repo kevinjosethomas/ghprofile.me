@@ -11,6 +11,10 @@ const app = fastify({ logger: true });
 app.register(database);
 app.register(middleware);
 
-(async () => {
+const run = async () => {
   await app.listen(process.env.PORT);
-})();
+};
+
+run().catch((error) => {
+  console.error(`Failed to run webserver - {error.message}`);
+});
