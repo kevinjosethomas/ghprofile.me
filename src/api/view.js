@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 
   const userAgent = req.headers['user-agent'] ? req.headers['user-agent'] : req.headers['User-Agent'];
   const isDev = process.env.NODE_ENV === 'development';
-  const isGithubCamo = userAgent.startsWith('github-camo');
+  const isGithubCamo = userAgent?.startsWith('github-camo');
   if (!isDev && !isGithubCamo) return;
 
   incrementCachedViewCount(name);
